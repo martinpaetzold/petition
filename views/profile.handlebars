@@ -1,0 +1,22 @@
+<h1>Your awesome profile</h1>
+<p>
+Elit mollit proident ad incididunt ad laboris commodo laborum pariatur ex.
+</p>
+{{#if error}}
+<span class="errorMsg">
+<i class="icofont-exclamation-tringle"></i> {{error}}
+</span>
+{{/if}}
+<form action="/login" method="post">
+
+    <input type="text" name="city" id="city" placeholder="Cologne Kalk">
+
+    <input type="number" name="age" id="age" placeholder="35">
+
+    <input type="url" name="website" id="website" placeholder="https://spiced-academy.com">
+
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+    <button>Update profile data</button>
+
+</form>

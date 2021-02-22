@@ -124,6 +124,11 @@ app.post("/login", (request, response) => {
     }
 });
 
+app.get("/profile", (request, response) => {
+    console.log("🐢  check request.. ", "/profile");
+    response.render("profile");
+});
+
 app.get("/sign-petition", (request, response) => {
     response.render("signatureform");
 });
