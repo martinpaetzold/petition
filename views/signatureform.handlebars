@@ -1,0 +1,21 @@
+<h2>Please sign out petition</h2>
+<p>
+Nostrud in amet cillum occaecat consequat irure id nulla et adipisicing tempor do voluptate.
+Id ex qui laboris sit officia laboris esse nulla velit ut.
+</p>
+{{#if error}}
+<span class="errorMsg">
+<i class="icofont-exclamation-tringle"></i> {{error}}
+</span>
+{{/if}}
+<form action="/sign-petition" method="post">
+
+    <canvas id="signatureCanvas" width="500" height="150"></canvas>
+
+    <input type="hidden" name="signature_code" id="signatureCode">
+
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+    <button>Sign petition now.</button>
+
+</form>

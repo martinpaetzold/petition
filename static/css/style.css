@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap");
+
+body {
+    background: rgba(119, 136, 153, 0.3);
+    padding: 0;
+    width: 100vw;
+    margin: 0 auto;
+    font-family: "Open Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+#subnavi {
+    height: 18px;
+    padding: 5px;
+    background: navy;
+    color: #fff;
+    font-size: 14px;
+    text-align: right;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+header {
+    background: #fff;
+    border-top: 4px solid navy;
+    padding: 10px;
+    font-size: 40px;
+}
+
+header img {
+    padding-top: 10px;
+}
+
+navi {
+    width: 20vw;
+    float: right;
+}
+
+main {
+    background: rgba(138, 150, 184, 0.5);
+    padding: 40px;
+    margin-top: 30px;
+}
+
+canvas {
+    display: block;
+    position: relative;
+    margin-top: 10px;
+}
+
+input {
+    height: 40px;
+    width: 489px;
+    font-size: 16px;
+    display: block;
+    margin-top: 10px;
+    padding-left: 5px;
+}
+
+button {
+    height: 50px;
+    width: 500px;
+    margin-top: 10px;
+    font-size: 24px;
+    background-color: navy;
+    color: #fff;
+    padding: 10px;
+    border: 0;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+
+button.sub {
+    margin-top: 40px;
+    background-color: darkgray;
+}
+
+footer {
+    background: navy;
+    color: #fff;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+#signatureCanvas {
+    background: #fff;
+}
+
+.errorMsg {
+    color: darkred;
+}

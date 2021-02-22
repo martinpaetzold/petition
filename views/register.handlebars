@@ -1,0 +1,27 @@
+<h1>Nice! You want to register.</h1>
+<p>
+Elit mollit proident ad incididunt ad laboris commodo laborum pariatur ex. Nostrud
+in amet cillum occaecat consequat irure. Please fill in the form.
+</p>
+{{#if error}}
+<span class="errorMsg">
+<i class="icofont-exclamation-tringle"></i> {{error}}
+</span>
+{{/if}}
+<form action="/register" method="post">
+
+    <input type="text" name="firstname" id="firstname" placeholder="Your firstname">
+
+    <input type="text" name="lastname" id="lastname" placeholder="Your lastname">
+
+    <input type="email" name="email" id="email" placeholder="jane@doe.com">
+
+    <input type="password" name="password" id="password" placeholder="Your password">
+
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+    <button>Register now.</button>
+
+</form>
+
+<a href="/login"><button class="sub">Already registered? Just login.</button></a>

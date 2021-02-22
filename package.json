@@ -1,7 +1,7 @@
 {
     "name": "petition",
     "version": "1.0.0",
-    "description": "",
+    "description": "The spicy petition project",
     "main": "server.js",
     "scripts": {
         "test": "jest",
@@ -15,10 +15,11 @@
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.3",
-        "cookie-session": "^2.0.0-alpha.1",
-        "csurf": "^1.9.0",
+        "cookie-session": "^2.0.0-rc.1",
+        "csurf": "^1.11.0",
         "express": "^4.14.0",
         "express-handlebars": "^3.0.0",
+        "helmet": "^4.4.1",
         "jest": "^25.1.0",
         "redis": "^2.6.2",
         "spiced-pg": "^1.0.4",
