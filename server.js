@@ -197,4 +197,5 @@ app.get("/", (request, response) => {
     }
 });
 
-app.listen(8080);
+//heroku || local
+app.listen(process.env.PORT || 8080);

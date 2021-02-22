@@ -1,5 +1,9 @@
 const spicedPG = require("spiced-pg");
-const db = spicedPG("postgres:martinpaetzold:@localhost:5432/petition");
+//const db = spicedPG("postgres:martinpaetzold:@localhost:5432/petition");
+//heroku || local
+const db =
+    process.env.DATABASE_URL ||
+    spicedPG("postgres:martinpaetzold:@localhost:5432/petition");
 
 //supposed to add a signature to the database
 exports.addSignature = (userId, signatureCode) => {
