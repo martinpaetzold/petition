@@ -1,0 +1,31 @@
+<h1>Edit your profile, {{firstname}}</h1>
+
+<p>
+Elit mollit proident ad incididunt ad laboris commodo laborum pariatur ex.
+</p>
+{{#if error}}
+<span class="errorMsg">
+<i class="icofont-exclamation-tringle"></i> {{error}}
+</span>
+{{/if}}
+<form action="/profile" method="post">
+
+    <input type="text" name="firstname" id="firstname" value="{{firstname}}">
+
+    <input type="text" name="lastname" id="lastname"  value="{{lastname}}">
+
+    <input type="email" name="email" id="email" value="{{email}}">
+
+    <input type="password" name="password" id="password" placeholder="Type new password / not necessary">
+
+    <input type="text" name="city" id="city"  value="{{city}}">
+
+    <input type="number" name="age" id="age" value="{{age}}">
+
+    <input type="url" name="website" id="website" placeholder="https://spiced-academy.com" value="{{homepage}}">
+
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+    <button>Update profile data</button>
+
+</form>

@@ -30,6 +30,16 @@ exports.addProfile = (userId, age, city, homepage) => {
     );
 };
 
+//get user information
+exports.getUser = (userId) => {
+    return db.query("SELECT * FROM users WHERE id=$1;", [userId]);
+};
+
+//get profile from current user
+exports.getProfileForUserId = (userId) => {
+    return db.query("SELECT * FROM profiles WHERE user_id = $1;", [userId]);
+};
+
 //get signers list from the database
 exports.getSigners = () => {
     return db.query(`

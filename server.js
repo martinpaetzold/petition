@@ -166,7 +166,29 @@ app.post("/profile", (request, response) => {
     });
 });
 
-app.get("/profile/edit", (request, response) => {});
+app.get("/profile-edit", (request, response) => {
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
+    const userId = request.session.user.id;
+    Promise.all([
+        database.getUser(userId),
+        database.getProfileForUserId(userId),
+    ]).then((results) => {
+        const userInfo = results[0].rows[0];
+        const profileInfo = results[1].rows[0];
+        response.render("profile-edit", {
+            // firstname: userInfo.firstname,
+            // lastname: userInfo.lastname,
+            // age: profileInfo.age
+            //...
+            ...userInfo,
+            ...profileInfo,
+        });
+    });
+});
 
 app.get("/sign-petition", (request, response) => {
     //checkLoginStatus
