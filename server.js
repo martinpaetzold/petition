@@ -73,6 +73,11 @@ app.post("/register", (request, response) => {
 });
 
 app.get("/login", (request, response) => {
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
     response.render("login");
 });
 
@@ -126,6 +131,12 @@ app.post("/login", (request, response) => {
 
 app.get("/profile", (request, response) => {
     console.log("🐢  check request.. ", "/profile");
+
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
     const user_id = request.session.user.id;
     const firstname = request.session.user.firstname;
     console.log(firstname, user_id);
@@ -155,7 +166,14 @@ app.post("/profile", (request, response) => {
     });
 });
 
+app.get("/profile/edit", (request, response) => {});
+
 app.get("/sign-petition", (request, response) => {
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
     response.render("signatureform");
 });
 
@@ -181,6 +199,11 @@ app.post("/sign-petition", (request, response) => {
 });
 
 app.get("/thank-you", (request, response) => {
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
     //get the signature from the db
     const userID = request.session.user.id;
     database.getNameAndSignature(userID).then((results) => {
@@ -203,6 +226,11 @@ app.get("/signers", (request, response) => {
 });
 
 app.get("/logout", (request, response) => {
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
     //console.log("Ready to logout...");
     if (request.cookies.login == "true") {
         //let test123 = request.cookies.login;
@@ -215,9 +243,8 @@ app.get("/logout", (request, response) => {
 });
 
 app.get("/", (request, response) => {
-    //check if already logged in
-    if (request.cookies.login == "true") {
-        // response.redirect(302, "/thank-you");
+    //checkLoginStatus
+    if (request.session.user) {
         const firstname = request.session.user.firstname;
         response.render("home", {
             firstname: firstname,
@@ -229,4 +256,6 @@ app.get("/", (request, response) => {
 });
 
 //heroku || local
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080, () => {
+    console.log("🛰️  listening..");
+});
