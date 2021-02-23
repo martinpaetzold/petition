@@ -190,6 +190,55 @@ app.get("/profile-edit", (request, response) => {
     });
 });
 
+app.post("/profile-edit", (request, response) => {
+    //checkLoginStatus
+    if (!request.session.user) {
+        return response.redirect(302, "/register");
+    }
+
+    //update db user table (first-, lastname, email)
+    const userId = request.session.user.id;
+    const { firstname, lastname, email } = request.body;
+    const userUpdatePromise = database.updateUser(
+        userId,
+        firstname,
+        lastname,
+        email
+    );
+
+    //check for new pwd value and hash it
+    const { password } = request.body;
+    let passwordUpdatePromise;
+    if (password) {
+        passwordUpdatePromise = bcrypt
+            .genHash(password)
+            .then((hashedPassword) => {
+                return database.updateUserPassword(userId, hashedPassword);
+            });
+    }
+
+    //update db profile table (age, city, homepage)
+    const { age, city, homepage } = request.body;
+    const profilePromise = database.insertOrUpdateProfile(
+        userId,
+        age,
+        city,
+        homepage
+    );
+
+    //promise action
+    Promise.all([userUpdatePromise, passwordUpdatePromise, profilePromise])
+        .then((results) => {
+            response.redirect(302, "profile-edit");
+        })
+        .catch((error) => {
+            response.render("profile-edit", {
+                error: "Oh, no! Something went wrong.",
+                ...request.body,
+            });
+        });
+});
+
 app.get("/sign-petition", (request, response) => {
     //checkLoginStatus
     if (!request.session.user) {

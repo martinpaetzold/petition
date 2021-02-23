@@ -40,6 +40,51 @@ exports.getProfileForUserId = (userId) => {
     return db.query("SELECT * FROM profiles WHERE user_id = $1;", [userId]);
 };
 
+//update existing profile data (!only first-, lastname, email)
+exports.updateUser = (userId, firstname, lastname, email) => {
+    return db.query(
+        `
+        UPDATE users
+        SET
+            firstname=$1,
+            lastname=$2,
+            email=$3
+        WHERE id=$4;
+    `,
+        [firstname, lastname, email, userId]
+    );
+};
+
+//user wants to change password. time to hash it.
+exports.updateUserPassword = (userId, passwordHash) => {
+    return db.query(
+        `
+        UPDATE users
+            SET password_hash=$1
+        WHERE id=$2;
+    `,
+        [passwordHash, userId]
+    );
+};
+
+//adding or update additional profile data (!only age, city, homepage)
+exports.insertOrUpdateProfile = (userId, age, city, homepage) => {
+    return db.query(
+        `
+        INSERT INTO profiles
+            (user_id, age, city, homepage)
+        VALUES
+            ($1, $2, $3, $4)
+        ON CONFLICT(user_id) DO
+            UPDATE
+                SET age=$2,
+                city=$3,
+                homepage=$4;
+    `,
+        [userId, age, city, homepage]
+    );
+};
+
 //get signers list from the database
 exports.getSigners = () => {
     return db.query(`
