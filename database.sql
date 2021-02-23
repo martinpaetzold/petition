@@ -49,3 +49,6 @@ CREATE TABLE profiles (
     city VARCHAR(1000) NOT NULL,
     homepage VARCHAR(1000)
 );
+
+-- ADD homepage manually
+UPDATE profiles SET homepage = 'https://spiced-academy.com' WHERE id = 2; 

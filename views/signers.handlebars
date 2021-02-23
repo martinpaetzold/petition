@@ -5,7 +5,12 @@
 {{#each signers}}
 
         <li>
-            {{firstname}} {{lastname}}
+            {{firstname}} {{lastname}}, {{age}}<br />
+            Living in {{city}}. 
+            {{#if homepage}}
+            <br />
+            Visit {{firstname}}'s website <a href="{{homepage}}">here <i class="icofont-external-link"></i></a>
+            {{/if}}
         </li>
 
     {{/each}}

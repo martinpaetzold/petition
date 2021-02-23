@@ -2,7 +2,8 @@ const spicedPG = require("spiced-pg");
 //const db = spicedPG("postgres:martinpaetzold:@localhost:5432/petition");
 //heroku || local
 const db = spicedPG(
-    process.env.DATABASE_URL || "postgres:florian:@localhost:5432/petition"
+    process.env.DATABASE_URL ||
+        "postgres:martinpaetzold:@localhost:5432/petition"
 );
 
 //supposed to add a signature to the database
@@ -33,12 +34,17 @@ exports.addProfile = (userId, age, city, homepage) => {
 exports.getSigners = () => {
     return db.query(`
             SELECT
-                user_id, firstname, lastname
+                firstname, lastname, email, age, city, homepage
             FROM
                 signatures
-            FULL OUTER JOIN
+            JOIN
                 users
-                ON (signatures.user_id = users.id);`);
+            ON
+                (signatures.user_id = users.id)
+            JOIN
+                profiles
+            ON
+                (profiles.user_id = users.id);`);
 };
 
 //get signature from user (id)
