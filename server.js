@@ -269,6 +269,16 @@ app.post("/sign-petition", (request, response) => {
         });
 });
 
+app.post("/remove-sig", (request, response) => {
+    console.log("/POST route 'remove signature'");
+    //remove sig from db
+    const user_id = request.session.user.id;
+    database.deleteSignature(user_id).then((results) => {
+        //redirect to /profile-edit or something else later..
+        response.redirect("/sign-petition");
+    });
+});
+
 app.get("/thank-you", (request, response) => {
     //checkLoginStatus
     if (!request.session.user) {

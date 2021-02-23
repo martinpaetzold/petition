@@ -133,3 +133,8 @@ exports.addUser = (firstname, lastname, email, password) => {
 exports.getUserByEmail = (emailAddress) => {
     return db.query("SELECT * FROM users WHERE email=$1;", [emailAddress]);
 };
+
+//delete signature from user
+exports.deleteSignature = (userId) => {
+    return db.query("DELETE FROM signatures WHERE user_id=$1;", [userId]);
+};

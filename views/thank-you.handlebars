@@ -22,4 +22,7 @@
     Go to your profile page.
 </button>
 </a>
-</a>
+<form action="/remove-sig" method="post">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button>Unsign the petition</button>
+</form>
