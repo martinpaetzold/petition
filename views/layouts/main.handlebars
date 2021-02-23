@@ -8,9 +8,17 @@
     </head>
     <body>
         {{#if login}}
-            <a href="/logout">
-            <div id="subnavi" class="logout"><i class="icofont-logout"></i>LOGOUT</div>
+            <div id="subnavi" >
+            {{#if firstname}}
+            Hello, {{firstname}}
+            {{/if}}
+            <a href="/profile-edit">
+            <i class="icofont-id"></i>
             </a>
+            <a href="/logout" alt="LOGOUT">
+            <i class="icofont-logout"></i>
+            </a>
+        </div>
         {{/if}}
         <header>
             <a href="/">

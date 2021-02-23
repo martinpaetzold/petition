@@ -14,14 +14,25 @@ a {
 }
 
 #subnavi {
-    height: 18px;
+    height: 16px;
     padding: 5px;
     background: navy;
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+#subnavi i {
     color: #fff;
     font-size: 14px;
     text-align: right;
     font-weight: normal;
-    letter-spacing: 3px;
+}
+
+#subnavi a {
+    color: #fff;
 }
 
 header {
