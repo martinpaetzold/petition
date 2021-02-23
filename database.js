@@ -18,6 +18,19 @@ exports.addSignature = (userId, signatureCode) => {
     );
 };
 
+//add profile information
+exports.addProfile = (userId, age, city, homepage) => {
+    return db.query(
+        `
+    INSERT
+        INTO profiles
+        (user_id, age, city, homepage)
+    VALUES ($1, $2, $3, $4);
+    `,
+        [userId, age, city, homepage]
+    );
+};
+
 //get signers list from the database
 exports.getSigners = () => {
     return db.query(`

@@ -54,8 +54,8 @@ app.post("/register", (request, response) => {
                     .then((userData) => {
                         // 5.store user info/data in the session
                         request.session.user = userData.rows[0];
-                        // 6.redirect to ("/"-Route)
-                        response.redirect(302, "/");
+                        // 6.redirect to ("/profile"-Route)
+                        response.redirect(302, "/profile");
                     })
                     .catch((error) => {
                         // 4. if e-mail exists already in db, re-render template with error message
@@ -126,7 +126,33 @@ app.post("/login", (request, response) => {
 
 app.get("/profile", (request, response) => {
     console.log("🐢  check request.. ", "/profile");
-    response.render("profile");
+    const user_id = request.session.user.id;
+    const firstname = request.session.user.firstname;
+    console.log(firstname, user_id);
+    response.render("profile", {
+        user_id: user_id,
+        firstname: firstname,
+    });
+});
+
+app.post("/profile", (request, response) => {
+    // 1.check if age and city put in
+    const { age, city, homepage } = request.body;
+    if (!age || !city) {
+        return response.render("profile", {
+            error: "Please fill out city and age.",
+            age,
+            city,
+            homepage,
+        });
+    }
+
+    // 2.store profile data in db
+    const user_id = request.session.user.id;
+    database.addProfile(user_id, age, city, homepage).then((results) => {
+        // 3.redirect to /sign-petition
+        response.redirect("/sign-petition");
+    });
 });
 
 app.get("/sign-petition", (request, response) => {

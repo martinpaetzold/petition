@@ -1,4 +1,10 @@
-<h1>Your awesome profile</h1>
+<h1>Finalize awesome profile</h1>
+{{#if firstname}}
+<h3>We need your data, 
+{{firstname}}
+ 🐙</h3>
+{{/if}}
+
 <p>
 Elit mollit proident ad incididunt ad laboris commodo laborum pariatur ex.
 </p>
@@ -7,7 +13,7 @@ Elit mollit proident ad incididunt ad laboris commodo laborum pariatur ex.
 <i class="icofont-exclamation-tringle"></i> {{error}}
 </span>
 {{/if}}
-<form action="/login" method="post">
+<form action="/profile" method="post">
 
     <input type="text" name="city" id="city" placeholder="Cologne Kalk">
 
