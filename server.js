@@ -331,6 +331,19 @@ app.get("/signers", (request, response) => {
     });
 });
 
+app.get("/credits", (request, response) => {
+    if (!request.session.user) {
+        response.render("credits", {});
+    } else {
+        const firstname = request.session.user.firstname;
+        const showSubMenu = true;
+        response.render("credits", {
+            firstname: firstname,
+            showSubMenu,
+        });
+    }
+});
+
 app.get("/logout", (request, response) => {
     //checkLoginStatus
     if (!request.session.user) {
