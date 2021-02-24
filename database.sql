@@ -51,4 +51,4 @@ CREATE TABLE profiles (
 );
 
 -- ADD homepage manually
-UPDATE profiles SET homepage = 'https://spiced-academy.com' WHERE id = 2; 
+UPDATE profiles SET homepage = 'https://spiced-academy.com' WHERE id = 2;

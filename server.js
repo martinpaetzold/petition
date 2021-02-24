@@ -245,7 +245,17 @@ app.get("/sign-petition", (request, response) => {
         return response.redirect(302, "/register");
     }
 
-    response.render("signatureform");
+    const userID = request.session.user.id;
+    database.getSignatureForUserId(userID).then((results) => {
+        const signature = results.rows[0];
+        console.log("signature", signature);
+
+        if (signature != "") {
+            response.redirect(302, "/thank-you");
+        } else {
+            response.render("signatureform");
+        }
+    });
 });
 
 app.post("/sign-petition", (request, response) => {

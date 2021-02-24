@@ -38,12 +38,112 @@ a {
 header {
     background: #fff;
     border-top: 4px solid navy;
+    font-size: 30px;
     padding: 10px;
-    font-size: 40px;
 }
 
 header img {
     padding-top: 10px;
+    height: 40px;
+}
+
+#hamburger {
+    float: right;
+    /* change the cursor to pointer */
+    cursor: pointer;
+}
+
+/* MENU */
+
+#hamburger-menu {
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+}
+
+#hamburger-menu.on {
+    visibility: visible;
+}
+
+#hamburger-menu::before {
+    content: "";
+    background: #000000;
+    opacity: 0.7;
+    /*  doesn't work. why?
+        opacity should work with transform..
+    */
+    transition: opacity 1s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#hamburger-menu nav {
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /* media query for lazy programmer */
+    width: 80%;
+    max-width: 400px;
+    transform: translateX(100%);
+    transition: all 0.2s;
+}
+
+#hamburger-menu.on nav {
+    transform: translateX(0);
+    transition: all 0.5s;
+}
+
+#hamburger-menu nav ul {
+    padding-top: 20%;
+}
+
+#hamburger-menu nav ul li {
+    list-style: none;
+    text-align: right;
+    margin: 30px;
+    /* some padding for mobile sausage fingers ;) */
+    padding: 20px;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+#hamburger-menu nav ul li.smaller-li {
+    margin: 10px;
+    margin-right: 40px;
+    /* some padding for mobile sausage fingers ;) */
+    padding: 10px;
+    font-size: 14px;
+}
+
+#hamburger-menu nav a {
+    text-decoration: none;
+    color: darkgray;
+}
+
+#hamburger-menu nav a:hover {
+    text-decoration: none;
+    color: skyblue;
+}
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    font-size: 30px;
+    text-align: center;
+    /* change the cursor to pointer */
+    cursor: pointer;
 }
 
 navi {
