@@ -140,6 +140,17 @@ exports.deleteSignature = (userId) => {
 };
 
 //delete whole account TODO
-exports.deleteAccount = (userId) => {
+
+//1. delete signature, if signature exists, done. see above.
+//2. delete profile from profile table
+//3. delete user from user table
+// logout
+// go to / or /please, please come back page
+
+exports.deleteProfile = (userId) => {
+    return db.query("SQL", [userId]);
+};
+
+exports.deleteUserAccount = (userId) => {
     return db.query("SQL", [userId]);
 };
