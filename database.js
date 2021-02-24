@@ -138,3 +138,8 @@ exports.getUserByEmail = (emailAddress) => {
 exports.deleteSignature = (userId) => {
     return db.query("DELETE FROM signatures WHERE user_id=$1;", [userId]);
 };
+
+//delete whole account TODO
+exports.deleteAccount = (userId) => {
+    return db.query("SQL", [userId]);
+};
