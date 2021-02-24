@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        {{#if login}}
+        {{#if showSubMenu}}
             <div id="subnavi" >
             {{#if firstname}}
             Hello, {{firstname}}
@@ -34,7 +34,7 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="#">About</a></li>
-                    {{#if login}}
+                    {{#if showSubMenu}}
                     <li><a href="/sign-petition">Sign petition</a></li>
                     {{/if}}
                     <li><a href="/signers">Signers</a></li>

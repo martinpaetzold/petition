@@ -74,9 +74,9 @@ app.post("/register", (request, response) => {
 
 app.get("/login", (request, response) => {
     //checkLoginStatus
-    if (!request.session.user) {
+    /* if (!request.session.user) {
         return response.redirect(302, "/register");
-    }
+    } */
 
     response.render("login");
 });
@@ -108,15 +108,6 @@ app.post("/login", (request, response) => {
                 }
                 // 4.write user info to session
                 request.session.user = user;
-                // 5.set new cookie firstname
-                console.log(user);
-                //const { firstname, user_id } = user;
-                //console.log(firstname);
-                //response.cookie("firstname", firstname);
-                // 6.set new cookie login true
-                response.cookie("login", true);
-                //
-                console.log("Cookies: ", request.cookies);
                 // check if signed: true
                 // 7.redirect user to /thank-you or /sign-petition
                 if (request.cookies.signed == "true") {
@@ -139,10 +130,12 @@ app.get("/profile", (request, response) => {
 
     const user_id = request.session.user.id;
     const firstname = request.session.user.firstname;
+    const showSubMenu = true;
     console.log(firstname, user_id);
     response.render("profile", {
         user_id: user_id,
         firstname: firstname,
+        showSubMenu,
     });
 });
 
@@ -179,6 +172,7 @@ app.get("/profile-edit", (request, response) => {
     ]).then((results) => {
         const userInfo = results[0].rows[0];
         const profileInfo = results[1].rows[0];
+        const showSubMenu = true;
         response.render("profile-edit", {
             // firstname: userInfo.firstname,
             // lastname: userInfo.lastname,
@@ -186,6 +180,7 @@ app.get("/profile-edit", (request, response) => {
             //...
             ...userInfo,
             ...profileInfo,
+            showSubMenu,
         });
     });
 });
@@ -250,10 +245,16 @@ app.get("/sign-petition", (request, response) => {
         const signature = results.rows[0];
         console.log("signature", signature);
 
-        if (signature != "") {
-            response.redirect(302, "/thank-you");
+        if (signature == undefined) {
+            const firstname = request.session.user.firstname;
+            const showSubMenu = true;
+            response.render("signatureform", {
+                signature: signature,
+                firstname: firstname,
+                showSubMenu,
+            });
         } else {
-            response.render("signatureform");
+            response.redirect(302, "/thank-you");
         }
     });
 });
@@ -299,9 +300,13 @@ app.get("/thank-you", (request, response) => {
     const userID = request.session.user.id;
     database.getNameAndSignature(userID).then((results) => {
         const signature = results.rows[0];
+        const firstname = request.session.user.firstname;
+        const showSubMenu = true;
         console.log("signature", signature);
         response.render("thank-you", {
             signature: signature,
+            firstname: firstname,
+            showSubMenu,
         });
     });
 });
@@ -310,9 +315,19 @@ app.get("/signers", (request, response) => {
     //get signers from database
     database.getSigners().then((results) => {
         console.log(results.rows);
-        response.render("signers", {
-            signers: results.rows,
-        });
+        if (!request.session.user) {
+            response.render("signers", {
+                signers: results.rows,
+            });
+        } else {
+            const firstname = request.session.user.firstname;
+            const showSubMenu = true;
+            response.render("signers", {
+                signers: results.rows,
+                firstname: firstname,
+                showSubMenu,
+            });
+        }
     });
 });
 
@@ -322,24 +337,18 @@ app.get("/logout", (request, response) => {
         return response.redirect(302, "/register");
     }
 
-    //console.log("Ready to logout...");
-    if (request.cookies.login == "true") {
-        //let test123 = request.cookies.login;
-        //console.log(test123);
-        response.cookie("login", false);
-        response.redirect(302, "/");
-    } else {
-        response.redirect(302, "/");
-    }
+    request.session = null;
+    response.render("home");
 });
 
 app.get("/", (request, response) => {
     //checkLoginStatus
     if (request.session.user) {
         const firstname = request.session.user.firstname;
+        const showSubMenu = true;
         response.render("home", {
             firstname: firstname,
-            login: true,
+            showSubMenu,
         });
     } else {
         response.render("home");
