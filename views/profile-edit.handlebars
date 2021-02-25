@@ -29,3 +29,8 @@ Elit mollit proident ad incididunt ad laboris commodo laborum pariatur ex.
     <button>Update profile data</button>
 
 </form>
+
+<form action="/profile-delete" method="post">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="delete-user">Delete your whole profile.</button>
+</form>    

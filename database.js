@@ -139,18 +139,12 @@ exports.deleteSignature = (userId) => {
     return db.query("DELETE FROM signatures WHERE user_id=$1;", [userId]);
 };
 
-//delete whole account TODO
-
-//1. delete signature, if signature exists, done. see above.
-//2. delete profile from profile table
-//3. delete user from user table
-// logout
-// route to / or /please, please come back page
-
+//delete user from profile table
 exports.deleteProfile = (userId) => {
-    return db.query("SQL", [userId]);
+    return db.query("DELETE FROM profiles WHERE user_id=$1;", [userId]);
 };
 
+//delete user from users table
 exports.deleteUserAccount = (userId) => {
-    return db.query("SQL", [userId]);
+    return db.query("DELETE FROM users WHERE id=$1;", [userId]);
 };

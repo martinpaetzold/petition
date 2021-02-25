@@ -2,6 +2,9 @@
 
 body {
     background: rgba(119, 136, 153, 0.3);
+    background-image: url("../assets/server-room-long.png");
+    background-size: cover;
+    background-attachment: fixed;
     padding: 0;
     width: 100vw;
     margin: 0 auto;
@@ -155,7 +158,7 @@ navi {
 }
 
 main {
-    background: rgba(138, 150, 184, 0.5);
+    background: rgb(187, 187, 187);
     padding: 40px;
     margin-top: 30px;
 }
@@ -195,16 +198,23 @@ button.sub {
     background-color: darkgray;
 }
 
-.hero {
-    width: 100%;
-    height: 400px;
+button.delete-user {
+    margin-top: 60px;
+    background-color: darkred;
 }
 
+.hero {
+    width: 100%;
+    height: 250px;
+}
+
+/*
 .hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+*/
 
 footer {
     background: navy;

@@ -33,9 +33,9 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#">About</a></li>
                     {{#if showSubMenu}}
                     <li><a href="/sign-petition">Sign petition</a></li>
+                    <li><a href="/thank-you">Thank you</a></li>
                     {{/if}}
                     <li><a href="/signers">Signers</a></li>
                     <li class="smaller-li"><a href="/login">Login</a></li>
@@ -47,9 +47,14 @@
         </div>
 
         <content>
+
+            
             <div class="hero">
+                <!--
                 <img src="./assets/server-room.png" />
+                -->
             </div>
+            
 
             <main>
                 {{{body}}}

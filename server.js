@@ -234,6 +234,34 @@ app.post("/profile-edit", (request, response) => {
         });
 });
 
+app.post("/profile-delete", (request, response) => {
+    //get user id from session
+    const userId = request.session.user.id;
+
+    const promiseDeleteSignature = database.deleteSignature(userId);
+    const promiseDeleteProfile = database.deleteProfile(userId);
+    const promiseDeleteUser = database.deleteUserAccount(userId);
+
+    //promise action
+    Promise.all([
+        promiseDeleteSignature,
+        promiseDeleteProfile,
+        promiseDeleteUser,
+    ])
+        .then((results) => {
+            console.log("Oh no! One user has gone away..");
+            request.session = null;
+            response.redirect(302, "/");
+        })
+        .catch((error) => {
+            console.log(error);
+            response.render("profile-edit", {
+                error: "Oh, no! Something went wrong.",
+                ...request.body,
+            });
+        });
+});
+
 app.get("/sign-petition", (request, response) => {
     //checkLoginStatus
     if (!request.session.user) {
